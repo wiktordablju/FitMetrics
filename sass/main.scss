@@ -1,0 +1,108 @@
+@use "./reset";
+
+$main: #386150;
+$bg: #caf7e2;
+$txt: #3d3522;
+$help1: #4a442d;
+$help2: #58b09c;
+
+body {
+	background-color: $bg;
+	font-family: "Ubuntu", sans-serif;
+	font-size: 2rem;
+	color: $txt;
+}
+
+.header {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 10vh;
+	width: 100vw;
+	font-size: 4rem;
+	.header-underline {
+		width: 130px;
+		height: 4px;
+		background-color: $main;
+		margin: 0 auto;
+	}
+}
+
+.services {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 35vh;
+	width: 100vw;
+	background-color: $bg;
+	text-align: center;
+
+	.services-header {
+		font-size: 3rem;
+		margin-bottom: 4%;
+	}
+
+	.underline {
+		width: 220px;
+		height: 2px;
+		background-color: $main;
+		margin: 0 auto;
+		margin-bottom: 2%;
+	}
+	.sets {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 50vw;
+	}
+}
+
+.calc {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	height: 20vh;
+	width: 100vw;
+	.calc-header {
+		font-size: 3rem;
+	}
+}
+
+.tips {
+	height: 35vh;
+	width: 100vw;
+	background-color: black;
+}
+
+ul {
+	list-style: none;
+	text-align: center;
+}
+
+ol {
+	text-align: center;
+	list-style: none;
+}
+
+li {
+	padding-left: 8%;
+}
+
+.btn {
+	height: 100px;
+	width: 125px;
+	margin-top: 10px;
+	background-color: $help2;
+	border: 2px solid transparent;
+	border-radius: 4%;
+	transition: 0.3s;
+}
+
+.btn:hover {
+	cursor: pointer;
+	transform: scale(1.05);
+	box-shadow: 0px 0px 5px $main;
+}
