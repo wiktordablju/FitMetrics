@@ -11,6 +11,8 @@ body {
 	font-family: "Ubuntu", sans-serif;
 	font-size: 2rem;
 	color: $txt;
+	animation: fadeIn 0.6s forwards;
+	overflow-x: hidden;
 }
 
 .header {
@@ -21,6 +23,7 @@ body {
 	height: 10vh;
 	width: 100vw;
 	font-size: 4rem;
+
 	.header-underline {
 		width: 130px;
 		height: 4px;
@@ -42,6 +45,8 @@ body {
 	.services-header {
 		font-size: 3rem;
 		margin-bottom: 4%;
+		font-weight: 700;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 	}
 
 	.underline {
@@ -51,11 +56,12 @@ body {
 		margin: 0 auto;
 		margin-bottom: 2%;
 	}
+
 	.sets {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		width: 50vw;
+		width: 100vw;
 	}
 }
 
@@ -66,43 +72,93 @@ body {
 	align-items: center;
 	height: 20vh;
 	width: 100vw;
+
 	.calc-header {
 		font-size: 3rem;
+		font-weight: 700;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+	}
+	.calc-body {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		form {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
 	}
 }
 
 .tips {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	height: 35vh;
 	width: 100vw;
-	background-color: black;
+	margin-top: 11%;
 }
 
-ul {
-	list-style: none;
-	text-align: center;
-}
-
+ul,
 ol {
-	text-align: center;
 	list-style: none;
+	text-align: center;
+	padding: 0 15%;
+	width: 350px;
 }
 
 li {
 	padding-left: 8%;
 }
 
-.btn {
+input[type="text"],
+input[type="submit"] {
+	padding: 10px 15px;
+	border-radius: 5px;
+	border: 2px solid $help1;
+	transition: border-color 0.3s ease;
+
+	&:focus {
+		border-color: $main;
+		outline: none;
+	}
+}
+
+input[type="submit"] {
+	background-color: $help2;
+	color: white;
 	height: 100px;
 	width: 125px;
 	margin-top: 10px;
-	background-color: $help2;
-	border: 2px solid transparent;
+	cursor: pointer;
 	border-radius: 4%;
 	transition: 0.3s;
+
+	&:hover {
+		background-color: darken($help2, 10%);
+		transform: scale(1.05);
+		box-shadow: 0px 0px 5px $main;
+	}
 }
 
-.btn:hover {
-	cursor: pointer;
-	transform: scale(1.05);
-	box-shadow: 0px 0px 5px $main;
+.bmi-result {
+	background-color: rgba($main, 0.1);
+	padding: 10px 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba($txt, 0.1);
+}
+
+// Animacje
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
