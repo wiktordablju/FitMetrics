@@ -1,7 +1,8 @@
 <!-- 
+    Zadanie
     1. Wylistowac wszystkie uslugi z tabeli
     2. Obliczanie BMI wedlug wzoru, wysyla wynik do bazy
-    3. Wykazywanie w jakim stopniu jestes (niedowaga etc) i zarzucic jakies takei co mozna zrobic
+    3. Wykazywanie w jakim stopniu jestes (niedowaga etc) i zarzucic jakies porady co mozna zrobic
 -->
 
 <!DOCTYPE html>
@@ -20,11 +21,15 @@
 <body>
     <!-- FUNKCJE -->
     <?php
+
+
     function calculateBMI($weight, $height)
     {
         return $weight / ($height * $height);
     }
 
+
+    // Na bazie wyniku BMI wysyla odpowiednie porady
     function getTips($bmi)
     {
         if ($bmi < 18.5) {
@@ -58,14 +63,32 @@
         }
     }
 
+    // na bazie wyniku BMI sprawdza do jakiego bmi_id pasuje w bazie, by moc wyslac dobra kwerende do niej
+    function getBmiId($bmi, $connect)
+    {
+        $query = "SELECT id FROM bmi WHERE $bmi >= wart_min AND $bmi <= wart_max LIMIT 1";
+        $result = mysqli_query($connect, $query);
+
+        // Jesli iloscz zwroconych wierszy to 1, to znaczy ze BMI dobrze obliczono
+        if (mysqli_num_rows($result) == 1) {
+            $row = mysqli_fetch_assoc($result);
+            return $row['id'];
+        } else {
+            return null;
+        }
+    }
     ?>
 
+    <!-- HEADER -->
     <div class="header">
         <div class="header-text">
             FitMetrics
         </div>
         <div class="header-underline"></div>
     </div>
+    <!-- --- -->
+
+    <!-- USŁUGI -->
     <div class="services">
         <div class="services-title">
             <p class="services-header">Nie czekaj na doskonałość - osiągnij ją z nami</p>
@@ -94,7 +117,6 @@
                 echo "
                 </ol>
                 ";
-                mysqli_close($connect);
                 ?>
             </div>
             <div class="set-2">
@@ -115,7 +137,7 @@
                 echo "
                 </ul>
                 ";
-                mysqli_close($connect);
+
                 ?>
 
             </div>
@@ -126,6 +148,11 @@
 
 
     </div>
+
+    <!-- --- -->
+
+
+    <!-- KALKULATOR BMI -->
     <div class="calc">
         <div class="calc-header">
             <p class="calc-text">Oblicz swoje BMI</p>
@@ -149,21 +176,35 @@
             $bmi = "";
             $output = "";
 
-            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['height']) && isset($_POST['weight'])) {
-                $height = $_POST['height'] / 100;
-                $weight = $_POST['weight'];
-
-                if (is_numeric($height) && is_numeric($weight) && $height > 0 && $weight > 0) {
+            // Obliczanie stanu osoby na bazie BMI
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if (
+                    isset($_POST['height'])  && $_POST['height'] > 0 && isset($_POST['weight']) && $_POST['weight'] > 0
+                ) {
+                    $height = $_POST['height'] / 100;
+                    $weight = $_POST['weight'];
+                    $date = date("Y-m-d");
                     $bmi = calculateBMi($weight, $height);
+                    $bmi_id = getBmiId($bmi, $connect);
 
-                    if ($bmi < 18.5) {
-                        $output = "Masz niedowagę.";
-                    } elseif ($bmi >= 18.5 && $bmi < 24.9) {
-                        $output = "Masz prawidłową masę ciała.";
-                    } elseif ($bmi >= 25 && $bmi < 29.9) {
-                        $output = "Masz nadwagę.";
-                    } else {
-                        $output = "Masz otyłość.";
+
+                    $query = "INSERT INTO wynik (id, bmi_id, data_pomiaru, wynik) VALUES ('', '$bmi_id', '$date', $bmi )";
+
+
+                    $connect->query($query);
+
+                    if ($height > 0 && $weight > 0) {
+
+
+                        if ($bmi < 18.5) {
+                            $output = "Masz niedowagę.";
+                        } elseif ($bmi >= 18.5 && $bmi < 24.9) {
+                            $output = "Masz prawidłową masę ciała.";
+                        } elseif ($bmi >= 25 && $bmi < 29.9) {
+                            $output = "Masz nadwagę.";
+                        } else {
+                            $output = "Masz otyłość.";
+                        }
                     }
                 } else {
                     $output = "Wprowadź poprawne wartości.";
@@ -182,6 +223,9 @@
 
         </div>
     </div>
+    <!-- --- -->
+
+    <!-- PORADY -->
     <div class="tips">
         <h1>Porady</h1>
         <?php
@@ -192,9 +236,11 @@
                 echo  $tip . "<br>";
             }
         }
+        mysqli_close($connect);
         ?>
 
     </div>
+    <!-- --- -->
 
 </body>
 

@@ -1,5 +1,7 @@
+// resetowanie domyslnych styli
 @use "./reset";
 
+// kolory
 $main: #386150;
 $bg: #caf7e2;
 $txt: #3d3522;
@@ -15,6 +17,7 @@ body {
 	overflow-x: hidden;
 }
 
+// HEADER
 .header {
 	display: flex;
 	flex-direction: column;
@@ -31,7 +34,9 @@ body {
 		margin: 0 auto;
 	}
 }
+// ---
 
+// USLUGI
 .services {
 	display: flex;
 	flex-direction: column;
@@ -65,6 +70,20 @@ body {
 	}
 }
 
+ul,
+ol {
+	list-style: none;
+	text-align: center;
+	padding: 0 15%;
+	width: 350px;
+}
+
+li {
+	padding-left: 8%;
+}
+// ---
+
+// KALKULATOR
 .calc {
 	display: flex;
 	flex-direction: column;
@@ -83,15 +102,48 @@ body {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+
 		form {
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
+			input[type="text"],
+			input[type="submit"] {
+				padding: 10px 15px;
+				border-radius: 5px;
+				border: 2px solid $help1;
+				transition: border-color 0.3s ease;
+			}
+
+			input[type="submit"] {
+				background-color: $help2;
+				color: white;
+				height: 100px;
+				width: 125px;
+				margin-top: 10px;
+				cursor: pointer;
+				border-radius: 4%;
+				transition: 0.3s;
+			}
+
+			input[type="submit"]:hover {
+				background-color: darken($help2, 10%);
+				transform: scale(1.05);
+				box-shadow: 0px 0px 5px $main;
+			}
+		}
+		.bmi-result {
+			background-color: rgba($main, 0.1);
+			padding: 10px 20px;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba($txt, 0.1);
 		}
 	}
 }
+// ---
 
+// PORADY
 .tips {
 	display: flex;
 	flex-direction: column;
@@ -101,57 +153,9 @@ body {
 	width: 100vw;
 	margin-top: 11%;
 }
+// ---
 
-ul,
-ol {
-	list-style: none;
-	text-align: center;
-	padding: 0 15%;
-	width: 350px;
-}
-
-li {
-	padding-left: 8%;
-}
-
-input[type="text"],
-input[type="submit"] {
-	padding: 10px 15px;
-	border-radius: 5px;
-	border: 2px solid $help1;
-	transition: border-color 0.3s ease;
-
-	&:focus {
-		border-color: $main;
-		outline: none;
-	}
-}
-
-input[type="submit"] {
-	background-color: $help2;
-	color: white;
-	height: 100px;
-	width: 125px;
-	margin-top: 10px;
-	cursor: pointer;
-	border-radius: 4%;
-	transition: 0.3s;
-
-	&:hover {
-		background-color: darken($help2, 10%);
-		transform: scale(1.05);
-		box-shadow: 0px 0px 5px $main;
-	}
-}
-
-.bmi-result {
-	background-color: rgba($main, 0.1);
-	padding: 10px 20px;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px rgba($txt, 0.1);
-}
-
-// Animacje
+// Animacja podczas odpalenia strony
 @keyframes fadeIn {
 	from {
 		opacity: 0;
