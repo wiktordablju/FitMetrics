@@ -2,11 +2,11 @@
 @use "./reset";
 
 // kolory
-$main: #386150;
-$bg: #caf7e2;
-$txt: #3d3522;
-$help1: #4a442d;
-$help2: #58b09c;
+$main: #4e5d6a;
+$bg: #e2e6e9;
+$txt: #2c3e50;
+$help1: #a3b1b6;
+$help2: #61a6a6;
 
 body {
 	background-color: $bg;
@@ -122,6 +122,7 @@ li {
 				height: 100px;
 				width: 125px;
 				margin-top: 10px;
+				margin-bottom: 25px;
 				cursor: pointer;
 				border-radius: 4%;
 				transition: 0.3s;
