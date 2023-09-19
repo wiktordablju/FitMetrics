@@ -184,7 +184,7 @@
                     $height = $_POST['height'] / 100;
                     $weight = $_POST['weight'];
                     $date = date("Y-m-d");
-                    $bmi = calculateBMi($weight, $height);
+                    $bmi = round(calculateBMi($weight, $height), 0);
                     $bmi_id = getBmiId($bmi, $connect);
 
 
