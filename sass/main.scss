@@ -109,14 +109,14 @@ li {
 			justify-content: center;
 			align-items: center;
 			input[type="text"],
-			input[type="submit"] {
+			.btn {
 				padding: 10px 15px;
 				border-radius: 5px;
 				border: 2px solid $help1;
 				transition: border-color 0.3s ease;
 			}
 
-			input[type="submit"] {
+			.btn {
 				background-color: $help2;
 				color: white;
 				height: 100px;
@@ -128,7 +128,7 @@ li {
 				transition: 0.3s;
 			}
 
-			input[type="submit"]:hover {
+			.btn:hover {
 				background-color: darken($help2, 10%);
 				transform: scale(1.05);
 				box-shadow: 0px 0px 5px $main;

@@ -134,13 +134,13 @@ li {
   align-items: center;
 }
 .calc .calc-body form input[type=text],
-.calc .calc-body form input[type=submit] {
+.calc .calc-body form .btn {
   padding: 10px 15px;
   border-radius: 5px;
   border: 2px solid #a3b1b6;
   transition: border-color 0.3s ease;
 }
-.calc .calc-body form input[type=submit] {
+.calc .calc-body form .btn {
   background-color: #61a6a6;
   color: white;
   height: 100px;
@@ -151,7 +151,7 @@ li {
   border-radius: 4%;
   transition: 0.3s;
 }
-.calc .calc-body form input[type=submit]:hover {
+.calc .calc-body form .btn:hover {
   background-color: #4c8888;
   transform: scale(1.05);
   box-shadow: 0px 0px 5px #4e5d6a;
